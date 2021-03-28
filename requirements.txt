@@ -1,0 +1,11 @@
+bio==0.4.1
+biopython==1.78
+certifi==2020.12.5
+chardet==4.0.0
+click==7.1.2
+# Editable install with no version control (forest==0.1)
+-e /Users/liz/zhentools/test
+idna==2.10
+numpy==1.19.5
+requests==2.25.1
+urllib3==1.26.4
