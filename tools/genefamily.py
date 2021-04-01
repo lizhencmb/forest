@@ -164,10 +164,10 @@ class GeneFamily(object):
     def run_raxml(self):
         wd = os.path.join(os.path.abspath('.'), self.wrkdir)
         aln = os.path.join(wd, self.id + ".cds.fasta.trimal")
-        #cmd = ["raxmlHPC-PTHREADS", "-T", "8", "-f", "a",
+        #cmd = ["raxmlHPC-PTHREADS", "-T", "4", "-f", "a",
         cmd = ["raxmlHPC-PTHREADS", "-T", "1", "-f", "a",
-        #        "-x", "601376", "-p", "601376", "-#", "100",
-                "-x", "601376", "-p", "601376", "-#", "10", "-w", wd,
+                "-x", "601376", "-p", "601376", "-#", "100", "-w", wd,
+        #        "-x", "601376", "-p", "601376", "-#", "10", "-w", wd,
                 "-m", "GTRGAMMA", "-s", aln, "-n", self.id]
         logging.info(' '.join(cmd))
         out = sp.run(cmd, stderr = sp.PIPE, stdout = sp.PIPE)
