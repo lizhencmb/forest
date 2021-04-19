@@ -140,7 +140,7 @@ class GeneFamily(object):
         cmd = ["muscle", "-seqtype", "protein", "-quiet", 
                 "-in", infile, "-out", alnfile]
         out = sp.run(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
-        logging.info(out.stderr.decode())
+        logging.warning(out.stderr.decode())
         #self.prot_aln = AlignIO.read(alnfile, "fasta")
 
     def run_trimal(self):
@@ -151,7 +151,7 @@ class GeneFamily(object):
                 "-out", outfile, "-fasta", "-automated1"]
         #print(' '.join(cmd))
         out = sp.run(cmd, stdout = sp.PIPE, stderr = sp.PIPE)
-        logging.info(out.stderr.decode())
+        logging.warning(out.stderr.decode())
     
     def build_phylo(self):
         if self.phylotool == "raxml":
@@ -165,12 +165,12 @@ class GeneFamily(object):
         wd = os.path.join(os.path.abspath('.'), self.wrkdir)
         aln = os.path.join(wd, self.id + ".cds.fasta.trimal")
         #cmd = ["raxmlHPC-PTHREADS", "-T", "4", "-f", "a",
-        cmd = ["raxmlHPC-PTHREADS", "-T", "1", "-f", "a",
+        cmd = ["raxmlHPC-PTHREADS", "-T", "4", "-f", "a",
                 "-x", "601376", "-p", "601376", "-#", "100", "-w", wd,
         #        "-x", "601376", "-p", "601376", "-#", "10", "-w", wd,
                 "-m", "GTRGAMMA", "-s", aln, "-n", self.id]
         logging.info(' '.join(cmd))
         out = sp.run(cmd, stderr = sp.PIPE, stdout = sp.PIPE)
-        logging.info(out.stderr.decode())
+        logging.warning(out.stderr.decode())
         treefile = os.path.join(wd, 'RAxML_bipartitions.' + self.id)
         self.phylo = Phylo.read(treefile, 'newick')
